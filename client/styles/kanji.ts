@@ -31,5 +31,27 @@ export const KanjiDiv = styled.div`
 `
 
 export const Kanji = styled.div`
-    font-size: 50px;
+    font-size: 100px;
+`
+
+export const Background = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    top: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div{
+        width: 900px;
+        height: 500px;
+    }
+`
+
+export const Canvas = styled.canvas`
+    width: 900px;
+    height: 500px;
+    background-color: white;
 `
