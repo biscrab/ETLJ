@@ -1,11 +1,19 @@
 import styled from "styled-components";
 
 export const Body = styled.div`
-    width: 1300px;
+    width: 1100px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    margin: 0px 30px;
+    margin: 50px 0px;
+`
+
+export const KBody = styled.div`
+    width: 1000px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 50px 0px;
 `
 
 export const GradeHeader = styled.div`
@@ -28,10 +36,30 @@ export const GradeBody = styled.div`
 
 export const KanjiDiv = styled.div`
     display: flex;
+    img{
+        height: 40px;
+    }
+`
+
+export const KanjiCaracter = styled.div`
+    border: 4px solid #C93756;
+    button{
+        padding: 10px;
+        width: 100%;
+        font-weight: bold;
+        font-size: 18px;
+    }
+`
+
+export const Info = styled.div`
+    display: flex;
+    flex-direction: column;
 `
 
 export const Kanji = styled.div`
-    font-size: 100px;
+    font-size: 200px;
+    line-height: 200px;
+    padding: 30px;
 `
 
 export const Background = styled.div`
@@ -47,6 +75,9 @@ export const Background = styled.div`
     div{
         width: 900px;
         height: 500px;
+    }
+    i{
+        position: absolute;
     }
 `
 

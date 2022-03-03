@@ -42,6 +42,10 @@ const nextConfig = {
         source: '/api/:kanji*',
         destination: `https://ko.wiktionary.org/wiki/:kanji*`,
       },
+      {
+        source: '/word',
+        destination: `https://ja.dict.naver.com/#/jlpt/list`
+      }
     ];
   },
 };
