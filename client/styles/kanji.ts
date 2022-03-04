@@ -5,7 +5,7 @@ export const Body = styled.div`
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    margin: 50px 0px;
+    padding: 30px 0px;
 `
 
 export const KBody = styled.div`
@@ -31,6 +31,9 @@ export const GradeBody = styled.div`
         font-size: 25px;
         margin: 5px;
         cursor: pointer;
+        :hover{
+            color: #C93756;
+        }
     }
 `
 
@@ -42,7 +45,7 @@ export const KanjiDiv = styled.div`
 `
 
 export const KanjiCaracter = styled.div`
-    border: 4px solid #C93756;
+    border: 5px solid #C93756;
     button{
         padding: 10px;
         width: 100%;
@@ -51,9 +54,12 @@ export const KanjiCaracter = styled.div`
     }
 `
 
-export const Info = styled.div`
-    display: flex;
-    flex-direction: column;
+export const InfoDiv = styled.div`
+    margin-left: 50px;
+    font-size: 16px;
+    h2{
+        margin: 0;
+    }
 `
 
 export const Kanji = styled.div`

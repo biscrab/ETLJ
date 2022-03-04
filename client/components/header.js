@@ -8,10 +8,10 @@ const Header = () => {
                 <Link href={"/"}>EasyToLearnJapanese</Link>
             </S.Title>
             <S.PathDiv>
-                <Link href={"/hiragana"}>
+                <Link href={"/gana/hiragana"}>
                     <span>히라가나</span>
                 </Link>
-                <Link href={"/katagana"}>
+                <Link href={"/gana/katagana"}>
                     <span>가타가나</span>
                 </Link>
                 <Link href={"/kanji"}>

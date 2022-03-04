@@ -45,6 +45,10 @@ const nextConfig = {
       {
         source: '/word',
         destination: `https://ja.dict.naver.com/#/jlpt/list`
+      },
+      {
+        source: '/relate/:kanji',
+        destination: `https://ja.dict.naver.com/#/search?query=:kanji&range=meaning`
       }
     ];
   },

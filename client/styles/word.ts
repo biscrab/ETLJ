@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Body = styled.div`
-    width: 1300px;
+    width: 1000px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    margin: 0px 30px;
+    margin: 30px 0px;
     li{
         list-style: none;
     }
@@ -13,6 +13,11 @@ export const Body = styled.div`
 
 export const SelectDiv = styled.div`
     display: flex;
+    border-right: 1px solid #e5e5e5;
+`
+
+export const List = styled.ul`
+    height: 1000px;
 `
 
 export const Rank = styled.div`
@@ -20,6 +25,13 @@ export const Rank = styled.div`
     border-right: 1px solid #e5e5e5;
     vertical-align: top;
     width: 200px;
+`
+
+export const WorldClass = styled.div`
+    display: table-cell;
+    border-right: 1px solid #e5e5e5;
+    vertical-align: top;
+    width: 800px;
 `
 
 export const Tit = styled.div`
@@ -34,7 +46,7 @@ export const Tit = styled.div`
     font-weight: bold;
 `
 
-export const List = styled.ul`
+export const TagList = styled.ul`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -42,4 +54,9 @@ export const List = styled.ul`
     li{
         display: flex;
     }
+`
+
+export const PageDiv = styled.div`
+    display: flex;
+    justify-content: center;
 `

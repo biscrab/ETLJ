@@ -5,9 +5,12 @@ import { useEffect, useState } from 'react'
 import j from 'jquery'
 
 const Kanji = ({props}) => {
+    
     const data = props.data;
+
     const [onCanvas, setOnCanvas] = useState(false);
     const [painting, setPainting] = useState(false);
+    
     useEffect(() => {
         if(onCanvas){
             const canvas = document.getElementById('canvas');
@@ -65,31 +68,60 @@ const Kanji = ({props}) => {
         ctx.stroke();
     }
 
-    /*                    {data.kun_readings.map(i => {
-                        return(
-                            <span>{i}</span>
-                        )
-                    })}
-                    <span>({data.kmeannings} {data.kreadings})</span>
-                    <span>{data.stroke_count}획</span>
-                    <img src={data.image}/> */
+    function eraseCanvas(){
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext('2d');
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = '400px serif';
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        ctx.textAlign = "center";
+        ctx.fillText(data.kanji, canvas.width/2, 400);
+    }
 
     return(
         <>
         <S.KBody>
             <S.KanjiDiv>
                 <S.KanjiCaracter>
-                    <S.Kanji>{props.data.kanji}</S.Kanji>
+                    <S.Kanji>{data.kanji}</S.Kanji>
                     <button onClick={()=>setOnCanvas(true)}>쓰기</button>
                 </S.KanjiCaracter>                
                 <S.InfoDiv>
+                    <h2>({data.kmeannings} {data.kreadings})</h2>
+                    <p>
+                        {`훈독: `} 
+                        {data.kun_readings.map(
+                            i => {
+                                return(
+                                    <span>{`${i}, `}</span>
+                                )
+                            }
+                        )}
+                    </p>
+                    <p>
+                        {`음독: `} 
+                        {data.on_readings.map(
+                            i => {
+                                return(
+                                    <span>{`${i}, `}</span>
+                                )
+                            }
+                        )}
+                    </p>
+                    <p>{data.grade}급 (JLPT {data.jlpt}급)</p>
+                    <p>{data.stroke_count}획</p>
+                    <p>유니코드: {data.unicode}</p>
+                    <img src={data.image}/>
                 </S.InfoDiv>
             </S.KanjiDiv>
         </S.KBody>
         {onCanvas ?
             <S.Background className="background">
                 <div className="canvas">
-                    <i className="fa-solid fa-eraser fa-lg"></i>
+                    <i onClick={() => eraseCanvas()} className="fa-solid fa-eraser fa-lg"></i>
                     <S.Canvas id="canvas" width="900" height="500" onMouseDown={(e)=>startPainting(e)} onMouseLeave={()=>stopPainting()} onMouseUp={()=>stopPainting()} onMouseMove={(e)=>onMouseMove(e)}/>
                 </div>
             </S.Background>
@@ -140,8 +172,8 @@ Kanji.getInitialProps = async function (context) {
     const { kanji } = context.query;
     const res = await axios.get(`https://kanjiapi.dev/v1/kanji/${encodeURI(kanji)}`)
     const d = await res.data;
-    const wiki = await getWiki(kanji);
-    console.log(wiki);
+    const w = await getWiki(kanji);
+    const wiki = {...w, kmeannings: w.kmeannings.split(',')[0], kreadings: w.kreadings.split(',')[0]}
     const data = {...d, ...wiki};
     console.log(data);
     return {
