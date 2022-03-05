@@ -20,8 +20,8 @@ const Header = () => {
                 <Link href={"/word"}>
                     <span>단어</span>
                 </Link>
-                <Link href={"/explanation"}>
-                    <span>설명</span>
+                <Link href={"/grammer"}>
+                    <span>문법</span>
                 </Link>
             </S.PathDiv>
         </S.Header>

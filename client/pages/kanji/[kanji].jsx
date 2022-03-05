@@ -98,7 +98,7 @@ const Kanji = ({props}) => {
                 <S.KanjiCaracter>
                     <S.Kanji>{data.kanji}</S.Kanji>
                     <S.ButtonDiv>
-                        <button onClick={()=>setOnCanvas(true)}>쓰면서 외우기</button>
+                        <button onClick={()=>setOnCanvas(true)}>써보기</button>
                     </S.ButtonDiv>
                 </S.KanjiCaracter>                
                 <S.InfoDiv>
