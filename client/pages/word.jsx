@@ -30,19 +30,19 @@ const Word = ({props}) => {
                     <S.Tit>등급</S.Tit>
                     <S.TagList>
                         <li>
-                            <label>1급<input type="radio" id="level1"/></label>
+                            <label>1급<input type="radio" /></label>
                         </li>
                         <li>
-                            <label>2급<input type="radio" id="level2"/></label>
+                            <label>2급<input type="radio" /></label>
                         </li>
                         <li>
-                            <label>3급<input type="radio" id="level3"/></label>
+                            <label>3급<input type="radio" /></label>
                         </li>
                         <li>
-                            <label>4급<input type="radio" id="level4"/></label>
+                            <label>4급<input type="radio" /></label>
                         </li>
                         <li>
-                            <label>5급<input type="radio" id="level5"/></label>
+                            <label>5급<input type="radio" /></label>
                         </li>
                     </S.TagList>
                 </S.Rank>   
@@ -113,6 +113,7 @@ function getWord(query){
                 $("li .row").map(function(i, element){
                     var row = {readings: "", pronunciation: "", sound: "", mean: "", word_class: ""}
                     row.readings = String($(element).find('.origin > .link').text());
+                    row.pronunciation = String($(element).find('.origin > .prounciation').text());
                     row.sound = String($(element).find('.origin > .unit_Taglisten > .btn_Taglisten play mp3').attr("purl"));
                     row.mean = String($(element).find('.meanTaglist > .mean_item').text());
                     row.word_class = String($(element).find('.meanTaglist > .mean_item > .word_class').text());

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Body = styled.div`
-    width: 1100px;
+    width: 1000px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -49,7 +49,7 @@ type SelectProps = {
 
 export const Path = styled.button<SelectProps>`
     width: 50%;
-    height: 50px;
+    height: 55px;
     cursor: pointer;
     background-color: white;
     font-weight: bold;
@@ -57,6 +57,6 @@ export const Path = styled.button<SelectProps>`
     color: #333;
     outline: 0;
     border: 0;
-    border: ${props => props.selected ? "2px solid #C93756" : "2px solid #eee"};
-    border-bottom: ${props => props.selected ? "0px" : "2px solid #C93756"};
+    border: ${props => props.selected ? "3px solid #C93756" : "0px"};
+    border-bottom: ${props => props.selected ? "0px" : "3px solid #C93756"};
 `

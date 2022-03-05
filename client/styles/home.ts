@@ -19,6 +19,7 @@ export const Title = styled.div`
         display: flex;
         align-items: center;
         animation: fadein 2s;
+        -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.3));
 
         @keyframes fadein{
             from{

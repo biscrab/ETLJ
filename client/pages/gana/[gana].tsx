@@ -31,6 +31,7 @@ const Hiragana: NextPage<{}> = () => {
 
     useEffect(()=>{
         const s = window.speechSynthesis;
+        let speech = new SpeechSynthesisUtterance();
         setSynth(s);
         var voices = s.getVoices();
         var utterThis = new SpeechSynthesisUtterance("test")
@@ -39,9 +40,11 @@ const Hiragana: NextPage<{}> = () => {
 
     useEffect(()=>{
         $('td').click((i: any) => {
-            console.log(i.target.innerHTML.replace(/^[ぁ-ヺ]/gi, ""))
             const s = window.speechSynthesis;
-            s.speak(new SpeechSynthesisUtterance("a"))
+            console.log(i.target.outerText[0]);
+            const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
+            utterThis.lang = 'ja-JP';
+            s.speak(utterThis);
         })
     })
   
@@ -51,12 +54,14 @@ const Hiragana: NextPage<{}> = () => {
         <S.Body>
         <S.PathDiv>
             <Link href={'/gana/hiragana'}>
-                <S.Path selected={gana !== "katagana"}>히라가나</S.Path>
+                <S.Path selected={gana !== "katagana"}>히라가나 (平仮名)</S.Path>
             </Link>
             <Link href={'/gana/katagana'}>
-                <S.Path selected={gana === "katagana"}>가타카나</S.Path>
+                <S.Path selected={gana === "katagana"}>가타카나 (片仮名)</S.Path>
             </Link>
         </S.PathDiv>
+        히라가나(平仮名): 음절문자. 주로 형식형태소(조사나 어미)를 표기할 때 쓴다.<br/>
+        가타카나(片仮名): 음절문자. 주로 외래어를 표기할 때 쓰거나, 히라가나로 쓰는 단어라도, 강조하는 의미라면 가타카나로 표기한다.<br/>
         <>
         {gana !== "katagana" ?
         <>
@@ -561,6 +566,12 @@ const Hiragana: NextPage<{}> = () => {
         </table>
         </>
         }
+        <h3>장음</h3>
+        あ단의 장음은 뒤에 あ를 붙여서 표기한다. (이하 -aあ로 표기)<br/>
+        い단의 장음은 뒤에 い를 붙여서 표기한다. (이하 -iい로 표기)<br/>
+        う단의 장음은 뒤에 う를 붙여서 표기한다. (이하 -uう로 표기)<br/>
+        え단의 장음은 뒤에 い나 え나를 붙여서 표기한다. (이하 -eい, -eえ로 표기)<br/>
+        お단의 장음은 뒤에 う나 お를 붙여서 표기한다. (이하 -oう, -oお로 표기)<br/>
         </>
         </S.Body>
     )   
