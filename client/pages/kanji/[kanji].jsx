@@ -11,6 +11,14 @@ const Kanji = ({props}) => {
 
     const [onCanvas, setOnCanvas] = useState(false);
     const [painting, setPainting] = useState(false);
+
+    useEffect((e)=>{
+        j(".background").click(function(e){
+            if(!j(".canvas").has(e.target).length && onCanvas){
+                setOnCanvas(false);
+            }
+        })
+    })
     
     useEffect(() => {
         if(onCanvas){
@@ -23,14 +31,6 @@ const Kanji = ({props}) => {
         }
     },[onCanvas])
 
-    useEffect((e)=>{
-        j(".background").click(function(e){
-            if(!j(".canvas").has(e.target).length && onCanvas){
-                setOnCanvas(false);
-            }
-        })
-    })
-
     function startPainting(event){
         console.log("s");
         const canvas = document.getElementById("canvas");
@@ -38,6 +38,7 @@ const Kanji = ({props}) => {
 
         const x = event.nativeEvent.offsetX;
         const y = event.nativeEvent.offsetY;
+        
         ctx.strokeStyle = "black";
         ctx.lineWidth = 10;
         ctx.lineCap = "round"
@@ -103,9 +104,15 @@ const Kanji = ({props}) => {
                 </S.KanjiCaracter>                
                 <S.InfoDiv>
                     <div>
-                    <h2>({data.kmeannings.replace("1. ", "")} {data.kreadings.split('2.')[0].replace(/1. | /, "")})</h2>
+                    {data.kmeannings && data.kreadings ?
+                    <h1>({data.kmeannings.replace("1. ", "")} {data.kreadings.replace(/\s/gi, "").replace("2.", ", ").replace("1.", "")})</h1>
+                    :
+                    <></>
+                    }
                     {data.kun_readings[0] || data.name_readings[0] ?
                     <p>
+                        {data.kun_readings[0] ? 
+                        <>
                         {`훈독: `} 
                         {data.kun_readings.map(
                             (i, index) => {
@@ -119,6 +126,10 @@ const Kanji = ({props}) => {
                                 )
                             }
                         )}
+                        </>
+                        :
+                        <></>
+                        }
                         {data.name_readings[0] ?
                         <>
                         {data.kmeannings[0] ? " " : ""}
@@ -157,23 +168,18 @@ const Kanji = ({props}) => {
                             }
                         )}
                     </p>
+                    {data.busu ?
                     <p>부수: <Link href={`/kanji/${data.busu[0]}`}>{data.busu}</Link></p>
+                    :
+                    <></>
+                    }
                     <p>총 획수: {data.stroke_count}획</p>
                     <p>{data.grade ? `급수: ${data.grade}급 ` : ""}{data.jlpt ? `(JLPT ${data.jlpt}급)` : ""}</p>
                     <p>유니코드: {data.unicode}</p>
+                    <img src={data.image}/>
                     </div>
                 </S.InfoDiv>
             </S.KanjiDiv>
-            <img src={data.image}/>
-            <S.WordList>
-                {[].map(i => {
-                    return(
-                        <li>
-                            {i.readings}
-                        </li>
-                    )
-                })}
-            </S.WordList>
         </S.KBody>
         {onCanvas ?
             <S.Background className="background">
@@ -222,13 +228,16 @@ function getWiki(kanji){
                     })
                 resolve(info);
             })
+            .catch(err => {
+                resolve(false);
+            })
     })
 }
-
+/*
 function getWH(kanji){
     kanji = encodeURI(kanji);
     try {
-        return axios.get(`/r/${kanji}`);
+        return axios.get(`/search/${kanji}`);
     }catch(err){
         console.log(err);
     }
@@ -241,9 +250,10 @@ function getWord(kanji){
             .then((html) => {
                 const $ = cheerio.load(html.data);
                 console.log(html.data);
-                $("div .row").map(function (i, element) {
+                $("div.row").map(function (i, element) {
                     var row = {readings: "", mean: "", word_class: ""}
                     row.readings = String($(element).find('.origin > .link').text());
+                    console.log(row.readings);
                     row.mean = String($(element).find('.meanTaglist > .mean_item').text());
                     row.word_class = String($(element).find('.meanTaglist > .mean_item > .word_class').text());
                     arr.push(row);
@@ -251,7 +261,7 @@ function getWord(kanji){
             })
         resolve(arr);
     })
-}
+}*/
 
 
 Kanji.getInitialProps = async function (context) {
@@ -259,9 +269,15 @@ Kanji.getInitialProps = async function (context) {
     const res = await axios.get(`https://kanjiapi.dev/v1/kanji/${encodeURI(kanji)}`)
     const d = await res.data;
     const w = await getWiki(kanji);
-    const wiki = {...w, kmeannings: w.kmeannings.split(',')[0].replace("1. ", ""), kreadings: w.kreadings.split(',')[0]}
     //const word = await getWord(kanji);
-    const data = {...d, ...wiki/*, word: [...word]*/};
+    var data;
+    if(w){
+        const wiki = {...w, kmeannings: w.kmeannings.split(',')[0].replace("1. ", ""), kreadings: w.kreadings.split(',')[0]}
+        data = {...d, ...wiki};
+    }
+    else{
+        data = d;
+    }
     console.log(data);
     return {
         props : {data}

@@ -19,6 +19,12 @@ export const KBody = styled.div`
     }
 `
 
+export const Comment = styled.p`
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+`
+
 export const GradeHeader = styled.div`
     margin-top: 30px;
     font-weight: bold;
@@ -46,15 +52,8 @@ export const KanjiDiv = styled.div`
     display: flex;
 `
 
-export const WordList = styled.ul`
-/*
-    list-style: none;
-    border-top: 2px solid #C93756;
-    border-bottom: 2px solid #C93756;*/
-`
-
 export const KanjiCaracter = styled.div`
-    border: 5px solid #C93756;
+    border: 7px solid #C93756;
 `
 
 export const InfoDiv = styled.div`
@@ -67,8 +66,9 @@ export const InfoDiv = styled.div`
         font-weight: bold;
         margin-top: 5px;
         margin-bottom: 5px;
+        font-size: 17px;
     }
-    h2{
+    h1{
         margin: 0;
         margin-bottom: 10px;
     }
@@ -79,18 +79,18 @@ export const InfoDiv = styled.div`
 `
 
 export const Kanji = styled.div`
-    font-size: 200px;
-    line-height: 200px;
+    font-size: 250px;
+    line-height: 250px;
     padding: 30px;
 `
 
 export const ButtonDiv = styled.div`
-    border-top: 5px solid #C93756;
+    border-top: 7px solid #C93756;
     button{
-        height: 40px;
+        height: 45px;
         width: 100%;
         font-weight: bold;
-        font-size: 17px;
+        font-size: 20px;
         background-color: white;
         border: 0;
         cursor: pointer;

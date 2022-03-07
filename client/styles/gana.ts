@@ -43,6 +43,12 @@ export const PathDiv = styled.div`
     margin-bottom: 50px;
 `
 
+export const Comment = styled.p`
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+`
+
 type SelectProps = {
     selected: boolean
 }

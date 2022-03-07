@@ -41,18 +41,11 @@ const nextConfig = {
       {
         source: '/api/:kanji*',
         destination: `https://ko.wiktionary.org/wiki/:kanji*`,
-        permanent: true
       },
       {
         source: '/word',
         destination: `https://ja.dict.naver.com/#/jlpt/list`,
-        permanent: true
       },
-      {
-        source: '/r/:k*',
-        destination: `https://ja.dict.naver.com/#/search?range=open&query=%E5%8F%AF`,
-        permanent: true
-      }
     ];
   },
 };
