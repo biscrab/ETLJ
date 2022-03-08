@@ -88,8 +88,6 @@ const Kanji = ({props}) => {
     useEffect(()=>{
         const s = window.speechSynthesis;
         setSynth(s);
-        var voices = s.getVoices();
-        var utterThis = new SpeechSynthesisUtterance("test")
     },[])
 
     return(
@@ -118,6 +116,7 @@ const Kanji = ({props}) => {
                             (i, index) => {
                                 return(
                                     <span onClick={()=>{
+                                        synth.cancel();
                                         const utterThis = new SpeechSynthesisUtterance(i);
                                         utterThis.lang = 'ja-JP';
                                         synth.speak(utterThis)
@@ -138,6 +137,7 @@ const Kanji = ({props}) => {
                             (i, index) => {
                                 return(
                                     <span onClick={()=>{
+                                        synth.cancel();
                                         const utterThis = new SpeechSynthesisUtterance(i);
                                         utterThis.lang = 'ja-JP';
                                         synth.speak(utterThis)

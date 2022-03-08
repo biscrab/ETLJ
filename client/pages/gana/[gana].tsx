@@ -41,6 +41,7 @@ const Hiragana: NextPage<{}> = () => {
     useEffect(()=>{
         $('td').click((i: any) => {
             const s = window.speechSynthesis;
+            s.cancel();
             console.log(i.target.outerText[0]);
             const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
             utterThis.lang = 'ja-JP';

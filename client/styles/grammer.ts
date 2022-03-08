@@ -8,14 +8,18 @@ export const Body = styled.div`
     padding-bottom: 50px;
     ul{
         list-style: decimal;
-        margin: 5px 10px;
         margin-bottom: 30px;
+        margin-top: 15px;
+        padding-left: 35px;
+    }
+    li{
+        margin: 15px 0px;
     }
 `
 
 export const P = styled.p`
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 `
 
 export const Link = styled.p`
@@ -42,8 +46,8 @@ export const SubTitle = styled.div`
     margin-top: 30px;
     font-weight: bold;
     font-size: 17px;
-    border-bottom: 2px solid #C93756;
-    padding-bottom: 5px;
+    border-bottom: 3px solid #C93756;
+    padding-bottom: 3px;
     margin-bottom: 10px;
 `
 
