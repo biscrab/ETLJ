@@ -17,6 +17,6 @@
     "typeRoots": ["./node_modules/@types", "./@types"],
   },
   "typeRoots": ["./types", "./node_modules/@types"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/kangi/[kangi].jsx", "pages/index.jsx", "pages/word.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/kangi/[kangi].jsx", "pages/index.tsx", "pages/word.jsx", "pages/_app.jsx"],
   "exclude": ["node_modules"]
 }

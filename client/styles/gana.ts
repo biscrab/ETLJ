@@ -11,6 +11,7 @@ export const Body = styled.div`
         border-spacing: 0px;
     }
     td{
+        user-select: none;
         border: 1px solid #F08F90;
         cursor: pointer;
         padding: 0.2em 0.4em;

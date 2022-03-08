@@ -3,7 +3,7 @@ import * as S from '../styles/home'
 import { useEffect, useState } from 'react';
 import $ from 'jquery'
 
-const Home = () => {
+const Home: NextPage<{}> = () => {
 
 /*
   useEffect(()=>{

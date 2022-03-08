@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import * as S from '../../styles/gana'
 import $ from 'jquery';
-import cheerio from 'cheerio'
 
 const Hiragana: NextPage<{}> = () => {
 
@@ -42,10 +41,18 @@ const Hiragana: NextPage<{}> = () => {
         $('td').click((i: any) => {
             const s = window.speechSynthesis;
             s.cancel();
-            console.log(i.target.outerText[0]);
-            const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
-            utterThis.lang = 'ja-JP';
-            s.speak(utterThis);
+            console.log(i.target.outerText[1]);
+            var t;
+            if(i.target.outerText[1] === "ゃ" || "ゅ" || "ょ"){
+                const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0] + i.target.outerText[1]);
+                utterThis.lang = 'ja-JP';
+                s.speak(utterThis);
+            }
+            else{
+                const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
+                utterThis.lang = 'ja-JP';
+                s.speak(utterThis);
+            }
         })
     })
   
