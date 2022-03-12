@@ -131,7 +131,7 @@ const Kanji = ({props}) => {
                         }
                         {data.name_readings[0] ?
                         <>
-                        {data.kmeannings[0] ? " " : ""}
+                        {" "}
                         {"(비상용 한자: "}
                         {data.name_readings.map(
                             (i, index) => {
@@ -269,7 +269,6 @@ Kanji.getInitialProps = async function (context) {
     const res = await axios.get(`https://kanjiapi.dev/v1/kanji/${encodeURI(kanji)}`)
     const d = await res.data;
     const w = await getWiki(kanji);
-    //const word = await getWord(kanji);
     var data;
     if(w){
         const wiki = {...w, kmeannings: w.kmeannings.split(',')[0].replace("1. ", ""), kreadings: w.kreadings.split(',')[0]}

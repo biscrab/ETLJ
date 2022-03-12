@@ -5,7 +5,7 @@ export const Body = styled.div`
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    padding: 30px 0px;
+    padding-bottom: 50px;
 `
 
 export const KBody = styled.div`
