@@ -4,11 +4,16 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import * as S from '../../styles/gana'
 import $ from 'jquery';
+import axios from 'axios';
 
 const Hiragana: NextPage<{}> = () => {
 
     const router = useRouter();
+    const [mode, setMode] = useState("writting");
     const {gana} = router.query;
+    const [onCanvas, setOnCanvas] = useState(false);
+    const [painting, setPainting] = useState(false);
+    const [word, setWord] = useState("");
 /*
     const speech = new Speech();
 
@@ -27,38 +32,107 @@ const Hiragana: NextPage<{}> = () => {
     })*/
 
     const [synth, setSynth] = useState<any>();
+    
+    useEffect(() => {
+        if(onCanvas){
+            const canvas: any = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.font = '400px serif';
+            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+            ctx.textAlign = "center";
+            ctx.fillText(word, canvas.width/2, 400);
+        }
+    },[onCanvas])
 
-    useEffect(()=>{
-        const s = window.speechSynthesis;
-        let speech = new SpeechSynthesisUtterance();
-        setSynth(s);
-        var voices = s.getVoices();
-        var utterThis = new SpeechSynthesisUtterance("test")
-        //s.speak(utterThis)
-    },[])
-
-    useEffect(()=>{
-        $('td').click((i: any) => {
-            const s = window.speechSynthesis;
-            s.cancel();
-            console.log(i.target.outerText[1]);
-            var t;
-            if(i.target.outerText[1] === "ゃ" || "ゅ" || "ょ"){
-                const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0] + i.target.outerText[1]);
-                utterThis.lang = 'ja-JP';
-                s.speak(utterThis);
-            }
-            else{
-                const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
-                utterThis.lang = 'ja-JP';
-                s.speak(utterThis);
+    useEffect(() => {
+        $(".background").click(function(e){
+            if(!$(".canvas").has(e.target).length && onCanvas){
+                setOnCanvas(false);
             }
         })
     })
+
+    useEffect(()=>{
+        $('td').click((i: any) => {
+            if(mode === "listening"){
+                const s = window.speechSynthesis;
+                s.cancel();
+                console.log(i.target.outerText[1]);
+                if(i.target.outerText[1] === "ゃ" && "ゅ" && "ょ" && "ャ" && "ュ" && "ョ"){
+                    const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0] + i.target.outerText[1]);
+                    utterThis.lang = 'ja-JP';
+                    s.speak(utterThis);
+                }
+                else{
+                    const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
+                    utterThis.lang = 'ja-JP';
+                    s.speak(utterThis);
+                }
+            }
+            else{
+                if(i.target.outerText.length !== 8 && i.target.outerText !== undefined){
+                    setWord(i.target.outerText[0]);
+                    setOnCanvas(true);
+                }
+            }
+        })
+    })
+
+    function startPainting(event: any){
+        const canvas: any = document.getElementById("canvas");
+        const ctx: any = canvas.getContext('2d');
+
+        const x = event.nativeEvent.offsetX;
+        const y = event.nativeEvent.offsetY;
+        
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 10;
+        ctx.lineCap = "round"
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        setPainting(true);
+    }
+
+    function stopPainting(){
+        console.log("e");
+        const canvas: any = document.getElementById("canvas");
+        const ctx = canvas.getContext('2d');
+        ctx.closePath();
+        setPainting(false);
+    }
+
+    function onMouseMove(event: any){
+        const canvas: any  = document.getElementById("canvas");
+        const ctx = canvas.getContext('2d');
+
+        const x = event.nativeEvent.offsetX;
+        const y = event.nativeEvent.offsetY;
+
+        if(!painting){
+            return;
+        }
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+
+    function eraseCanvas(){
+
+        const canvas: any = document.getElementById("canvas");
+        const ctx = canvas.getContext('2d');
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = '400px serif';
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        ctx.textAlign = "center";
+        ctx.fillText(word, canvas.width/2, 400);
+    }
   
     // Log the properties of the voices in the list
 
     return(
+        <>
         <S.Body>
         <S.PathDiv>
             <Link href={'/gana/hiragana'}>
@@ -71,7 +145,13 @@ const Hiragana: NextPage<{}> = () => {
         <>
         {gana !== "katagana" ?
         <>
-        <h3 onClick={()=>synth.speak(new SpeechSynthesisUtterance("te"))}>히리가나 50음도</h3>
+        <S.TittleDiv>
+            <h3>히리가나 50음도</h3>
+            <S.Toggle>
+                <input type="checkbox"/>
+                <span />
+            </S.Toggle>
+        </S.TittleDiv>
         <table>
         <tbody>
             <tr>
@@ -582,6 +662,19 @@ const Hiragana: NextPage<{}> = () => {
         <S.Comment>가타카나(片仮名): 음절문자. 주로 외래어를 표기할 때 쓰거나, 히라가나로 쓰는 단어라도, 강조하는 의미라면 가타카나로 표기한다.</S.Comment>
         </>
         </S.Body>
+            <>
+            {onCanvas ?
+                <S.Background className="background">
+                    <div className="canvas">
+                        <i onClick={() => eraseCanvas()} className="fa fa-eraser fa-2x" style={{color: "#333"}}></i>
+                        <S.Canvas id="canvas" width="900" height="500" onMouseDown={(e)=>startPainting(e)} onMouseLeave={()=>stopPainting()} onMouseUp={()=>stopPainting()} onMouseMove={(e)=>onMouseMove(e)}/>
+                    </div>
+                </S.Background>
+                :
+                <></>
+            }
+            </>
+        </>
     )   
 }
 

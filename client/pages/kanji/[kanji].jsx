@@ -115,7 +115,7 @@ const Kanji = ({props}) => {
                         {data.kun_readings.map(
                             (i, index) => {
                                 return(
-                                    <span onClick={()=>{
+                                    <span key={index} onClick={()=>{
                                         synth.cancel();
                                         const utterThis = new SpeechSynthesisUtterance(i);
                                         utterThis.lang = 'ja-JP';
@@ -136,7 +136,7 @@ const Kanji = ({props}) => {
                         {data.name_readings.map(
                             (i, index) => {
                                 return(
-                                    <span onClick={()=>{
+                                    <span key={index} onClick={()=>{
                                         synth.cancel();
                                         const utterThis = new SpeechSynthesisUtterance(i);
                                         utterThis.lang = 'ja-JP';
@@ -159,7 +159,7 @@ const Kanji = ({props}) => {
                         {data.on_readings.map(
                             (i, index) => {
                                 return(
-                                    <span onClick={()=> {                                        
+                                    <span key={index} onClick={()=> {                                        
                                         const utterThis = new SpeechSynthesisUtterance(i);
                                         utterThis.lang = 'ja-JP';
                                         synth.speak(utterThis)

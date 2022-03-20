@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import axios from 'axios'
 import cheerio from 'cheerio'
 import * as S from '../styles/word'
 import { useRouter } from 'next/router'
@@ -123,18 +122,6 @@ function getWord(query){
             resolve(arr);
         })
     })
-}
-
-Word.getInitialProps = async function (context) {
-
-    const query = context.query;;
-    const data = await getWord(query);
-
-    console.log(data);
-
-    return {
-        props: {data}
-    }
 }
 
 export default Word

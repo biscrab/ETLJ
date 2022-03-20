@@ -44,6 +44,32 @@ export const PathDiv = styled.div`
     margin-bottom: 50px;
 `
 
+export const TittleDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    h3{
+        margin: 0;
+    }
+    margin-bottom: 30px;
+`
+
+export const Toggle = styled.div`
+    input{
+    width: 80px;
+    background-color: blue;
+    padding: 0px 5px;
+    height: 25px;
+    border-radius: 15px;
+    }
+    span{
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+        weight: 25x;
+        height: 25px;
+    }
+`
+
 export const Comment = styled.p`
     font-size: 14px;
     font-weight: bold;
@@ -66,4 +92,34 @@ export const Path = styled.button<SelectProps>`
     border: 0;
     border: ${props => props.selected ? "3px solid #C93756" : "0px"};
     border-bottom: ${props => props.selected ? "0px" : "3px solid #C93756"};
+`
+
+export const Background = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    top: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div{
+        width: 900px;
+        height: 500px;
+        display: flex;
+        justify-content: end;
+    }
+    i{
+        position: absolute;
+        padding-top: 8px;
+        padding-right: 8px;
+        cursor: pointer;
+    }
+`
+
+export const Canvas = styled.canvas`
+    width: 900px;
+    height: 500px;
+    background-color: white;
 `
