@@ -53,20 +53,81 @@ export const TittleDiv = styled.div`
     margin-bottom: 30px;
 `
 
-export const Toggle = styled.div`
+type ToggleType = {
+    checked: boolean
+}
+
+export const Toggle = styled.div<ToggleType>`
+    text-align: left;
+    width: 50px;
+    height: calc(50px / 2);
+    border-radius:calc(60px / 3);    
+    background-color: #0076f7;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    span {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    input[type="checkbox"] {
+        opacity: 0;
+        position: absolute;
+    } 
+    span:before, span:after {
+      content: "";
+      cursor: pointer;
+      position: absolute;
+    }
+    input[type="checkbox"]:checked:focus ~ span {
+        span {
+            box-shadow: 0 0 0 4px #fff;
+        }
+    }
+    span{
+      border-radius: calc(60px / 3);   
+    }
+    span:before {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      background-color: ${props => props.checked ? "#f1f1f1" : "rgba(0, 0, 0, 0)"};
+      border-radius: calc(60px / 3);
+      transition: opacity .2s ease-out .1s, transform .2s ease-out .1s;
+      transform: scale(1);
+      opacity: 1;
+    }
+    span:after{
+      top: 50%;
+      z-index: 3;
+      transition: transform .4s cubic-bezier(0.44,-0.12, 0.07, 1.15);
+      width: calc(50px / 2);
+      height: calc(50px / 2);
+      transform: translate3d(0, -50%, 0);
+      background-color: #fff;
+      border-radius: 100%;
+      box-shadow: 0 calc(2px / 3) calc(5px / 3) rgba(0, 0, 0, .3);  
+    }
     input{
-    width: 80px;
-    background-color: blue;
-    padding: 0px 5px;
-    height: 25px;
-    border-radius: 15px;
+        width: calc(80px / 3);
+        background-color: blue;
+        padding: 0px calc(5px / 3);
+        height: calc(25px / 3);
+        border-radius: calc(15px / 3);
     }
     span{
         border-radius: 50%;
-        background-color: white;
         cursor: pointer;
-        weight: 25x;
-        height: 25px;
+        weight: calc(25px / 3);
+        height: calc(25px / 3);
+    }
+    input[type="checkbox"]:checked ~ span:before {
+        transform: scale(0);
+        opacity: .7;
+    }
+    input[type="checkbox"]:checked ~ span:after {
+        transform: translate3d(100%, -50%, 0);
     }
 `
 
