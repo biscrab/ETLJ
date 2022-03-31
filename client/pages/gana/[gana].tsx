@@ -50,33 +50,7 @@ const Hiragana: NextPage<{}> = () => {
             }
         })
     })
-
-    useEffect(()=>{
-        $('td').click((i: any) => {
-            if(!writting){
-                const s = window.speechSynthesis;
-                s.cancel();
-                console.log(i.target.outerText[1]);
-                if(i.target.outerText[1] === "ゃ" && "ゅ" && "ょ" && "ャ" && "ュ" && "ョ"){
-                    const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0] + i.target.outerText[1]);
-                    utterThis.lang = 'ja-JP';
-                    s.speak(utterThis);
-                }
-                else{
-                    const utterThis = new SpeechSynthesisUtterance(i.target.outerText[0]);
-                    utterThis.lang = 'ja-JP';
-                    s.speak(utterThis);
-                }
-            }
-            else{
-                if(i.target.outerText.length !== 8 && i.target.outerText !== undefined){
-                    setWord(i.target.outerText[0]);
-                    setOnCanvas(true);
-                }
-            }
-        })
-    })
-
+    
     function startPainting(event: any){
         const canvas: any = document.getElementById("canvas");
         const ctx: any = canvas.getContext('2d');
@@ -147,22 +121,18 @@ const Hiragana: NextPage<{}> = () => {
                 :
                 <h3>가타카나 50음도</h3>
             }
-            <S.Toggle checked={!writting} onClick={()=>{
-                if(writting){
-                    setWritting(false)
-                }
-                else{
-                    setWritting(true)
-                }
-            }}>
+            <S.Mode>
+                <b>{writting ? "쓰기" : "듣기"}</b>
+                <S.Toggle checked={!writting} onClick={()=>{setWritting(!writting)}}>
                 <input type="checkbox" checked={!writting}/>
                 <span />
-            </S.Toggle>
+                </S.Toggle>
+            </S.Mode>
         </S.TittleDiv>
         {gana !== "katagana" ?
-        <HiraganaTable/>
+        <HiraganaTable writting={writting} setWord={setWord} setOnCanvas={setOnCanvas}/>
         :
-        <KataganaTable/>
+        <KataganaTable writting={writting} setWord={setWord} setOnCanvas={setOnCanvas}/>
         }
         <h3>반탁음</h3>
         <table>

@@ -47,10 +47,19 @@ export const PathDiv = styled.div`
 export const TittleDiv = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     h3{
         margin: 0;
     }
     margin-bottom: 30px;
+`
+
+export const Mode = styled.div`
+    display: flex;
+    align-items: center;
+    b{
+        margin-right: 10px;
+    }
 `
 
 type ToggleType = {
@@ -59,8 +68,8 @@ type ToggleType = {
 
 export const Toggle = styled.div<ToggleType>`
     text-align: left;
-    width: 50px;
-    height: calc(50px / 2);
+    width: 45px;
+    height: calc(45px / 2);
     border-radius:calc(60px / 3);    
     background-color: #0076f7;
     display: inline-block;
@@ -92,7 +101,7 @@ export const Toggle = styled.div<ToggleType>`
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      background-color: ${props => props.checked ? "#f1f1f1" : "rgba(0, 0, 0, 0)"};
+      //background-color: ${props => props.checked ? "#f1f1f1" : "rgba(0, 0, 0, 0)"};
       border-radius: calc(60px / 3);
       transition: opacity .2s ease-out .1s, transform .2s ease-out .1s;
       transform: scale(1);
@@ -102,8 +111,8 @@ export const Toggle = styled.div<ToggleType>`
       top: 50%;
       z-index: 3;
       transition: transform .4s cubic-bezier(0.44,-0.12, 0.07, 1.15);
-      width: calc(50px / 2);
-      height: calc(50px / 2);
+      width: calc(47px / 2);
+      height: calc(47px / 2);
       transform: translate3d(0, -50%, 0);
       background-color: #fff;
       border-radius: 100%;
