@@ -20,13 +20,16 @@ const Kanji: NextPage<{}> = () => {
                     <>
                     <S.GradeHeader>{index+1}등급</S.GradeHeader>
                     <S.GradeBody>
-                        {i.map((k, index) => {
+                        {i.map((k: any, index: number) => {
                             return(
                                 <Link key={index} href={`/kanji/${encodeURI(k)}`}>
                                     <span>{k}</span>
                                 </Link>
                             )
                         })}
+                    </S.GradeBody>
+                    <S.GradeBody>
+
                     </S.GradeBody>
                     </>
                 )

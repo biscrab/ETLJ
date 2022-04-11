@@ -180,6 +180,21 @@ const Kanji = ({props}) => {
                     </div>
                 </S.InfoDiv>
             </S.KanjiDiv>
+            <S.WordTitle></S.WordTitle>
+            {data.word ?
+            <S.WordList>
+                {data.word.map(i => {
+                    return(
+                        <li>
+                            <b>{i.variants[0].written} ({i.variants[0].pronounced})</b>
+                            <span>{i.meanings[0].glosses}</span>
+                        </li>
+                    )
+                }) }
+            </S.WordList>
+            :
+            <></>
+            }
         </S.KBody>
         {onCanvas ?
             <S.Background className="background">
@@ -269,14 +284,19 @@ Kanji.getInitialProps = async function (context) {
     const res = await axios.get(`https://kanjiapi.dev/v1/kanji/${encodeURI(kanji)}`)
     const d = await res.data;
     const w = await getWiki(kanji);
+    const word = await axios.get(`https://kanjiapi.dev/v1/words/${encodeURI(kanji)}`);
+    const wdata = await word.data;
     var data;
     if(w){
-        const wiki = {...w, kmeannings: w.kmeannings.split(',')[0].replace("1. ", ""), kreadings: w.kreadings.split(',')[0]}
+        const wiki = {...w, kmeannings: w.kmeannings.split(',')[0].replace("1. ", ""), kreadings: w.kreadings.split(',')[0]};
         data = {...d, ...wiki};
     }
     else{
         data = d;
     }
+
+    data = {...data, word: [...wdata]};
+
     console.log(data);
     return {
         props : {data}

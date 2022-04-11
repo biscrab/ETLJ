@@ -14,6 +14,7 @@ export const KBody = styled.div`
     left: 50%;
     transform: translateX(-50%);
     margin: 50px 0px;
+    padding-bottom: 50px;
     img{
         margin-top: 20px;
     }
@@ -50,6 +51,28 @@ export const GradeBody = styled.div`
 
 export const KanjiDiv = styled.div`
     display: flex;
+`
+
+export const WordTitle = styled.h5`
+    margin-top: 30px;
+`
+
+export const WordList = styled.ul`
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 3px solid #333;
+    border-bottom: 3px solid #333;
+    li{ 
+        display: flex;
+        align-items: center;
+        padding: 10px 0px;
+        border-bottom: 1px solid #ccc;
+    }
+    b{
+        font-size: 17px;
+        margin-right: 10px;
+    }
 `
 
 export const KanjiCaracter = styled.div`
