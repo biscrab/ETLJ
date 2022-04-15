@@ -1,7 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.css'
+import '../styles/globals.css'
 import Loading from '../components/Loading.js'
 import Header from '../components/header'
 import { useEffect, useState } from 'react'
-import '../styles/globals.css'
 import {useRouter} from 'next/router'
 
 function MyApp({ Component, pageProps }) {

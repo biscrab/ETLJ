@@ -16,6 +16,7 @@
     "@types/jquery": "^3.5.14",
     "@types/react-bootstrap": "^0.32.29",
     "@types/styled-components": "^5.1.23",
+    "bootstrap": "^5.1.3",
     "cheerio": "*",
     "jquery": "^3.6.0",
     "next": "12.1.0",
