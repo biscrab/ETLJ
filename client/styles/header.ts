@@ -11,6 +11,9 @@ export const Title = styled.div`
     padding: 15px;
     background-color: #C93756;
     color: white;
+    :hover{
+        color: default;
+    }
 `
 
 export const PathDiv = styled.div`

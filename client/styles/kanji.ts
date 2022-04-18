@@ -94,6 +94,8 @@ export const InfoDiv = styled.div`
     h1{
         margin: 0;
         margin-bottom: 10px;
+        font-size: 35px;
+        font-weight: bold;
     }
     span{
         cursor: pointer;
