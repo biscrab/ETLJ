@@ -4,12 +4,11 @@ import Loading from '../components/Loading.js'
 import Header from '../components/header'
 import { useEffect, useState } from 'react'
 import {useRouter} from 'next/router'
-import { Html, Head, Main, NextScript } from 'next/document'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
-  const pathname = router.pathname;
 
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +24,7 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
 
   return (
-    <Html>
+    <>
       <Head>
         <title>쉽게 배우는 일본어</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossoOrigin="anonymous"></link>
@@ -38,7 +37,7 @@ function MyApp({ Component, pageProps }) {
       <Header />
       <Component {...pageProps} />
       <Loading loading={loading}/>
-    </Html>
+    </>
   )
 }
 

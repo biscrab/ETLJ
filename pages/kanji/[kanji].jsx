@@ -183,9 +183,9 @@ const Kanji = ({props}) => {
             <S.WordTitle></S.WordTitle>
             {data.word ?
             <S.WordList>
-                {data.word.map(i => {
+                {data.word.map((i, index) => {
                     return(
-                        <li>
+                        <li key={index}>
                             <b>{i.variants[0].written} ({i.variants[0].pronounced})</b>
                             <span>{i.meanings[0].glosses[0]}</span>
                         </li>
