@@ -252,32 +252,22 @@ function getWiki(kanji){
 Kanji.getInitialProps = async function (context) {
     const { kanji } = context.query;
     const res = await axios.get(`https://kanjiapi.dev/v1/kanji/${encodeURI(kanji)}`)
-    const d = await res.data;
-    const w = await getWiki(kanji);
-    const word = await axios.get(`https://kanjiapi.dev/v1/words/${encodeURI(kanji)}`);
-    let wdata = await word.data;
-    let data;
-    /*
-    if(wdata.length > 1){
-        console.log(wdata);
-        let wsave = wdata.map(i => {
-            return i.meanings;
-        })
-        wdata = wsave;
-    }*/
-    if(w){
-        const wiki = {...w, kmeannings: w.kmeannings.split(',')[0].replace("1. ", ""), kreadings: w.kreadings.split(',')[0]};
-        data = {...d, ...wiki};
+    const data = await res.data;
+    const wiki = await getWiki(kanji);
+    const word = await axios.get(`https://kanjiapi.dev/v1/words/${encodeURI(kanji)}`).data;
+    let propsData;
+    if(wiki){
+        const wikiData = {...word, kmeannings: word.kmeannings.split(',')[0].replace("1. ", ""), kreadings: word.kreadings.split(',')[0]};
+        propsData = {...data, ...wikiData};
     }
     else{
-        data = d;
+        propsData = data;
     }
 
-    data = {...data, word: [...wdata]};
+    propsData = {...data, word: [...word]};
 
-    console.log(data);
     return {
-        props : {data}
+        props : {propsData}
     }
 }
 
